@@ -23,26 +23,37 @@ body
 .video
 {
   width: 100%;
+  z-index: 1 !important;
+  /* display: contents; */
 }
 
 .player-controls
 {
   /* display: flex; */
-  position: absolute;
+  position: absolute !important;
+  z-index: 2147483647 !important;
   bottom: 0;
-  width: 100%;
+  -webkit-box-sizing: border-box !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
   /* flex-wrap: wrap; */
   background: rgba(0,0,0,0);
-  transform: translateY(100%) translateY(-4px);
+  /* transform: translateY(100%) translateY(-4px); */
+  -moz-transform: translateY(100%) translateY(-4px); !important;
+  -ms-transform: translateY(100%) translateY(-4px); !important;
+  -webkit-transform: translateY(100%) translateY(-4px); !important;
   transition: all .2s;
 }
 
 .player:hover .player-controls
 {
+  /* padding-left: 10px;
+  padding-right: 10px; */
   transform: translateY(0);
+
 }
 
-.buttons #play-pause-button, #fullscreen-windowed-button
+.buttons #play-pause-button, #fullscreen-windowed-button, #settings-button, #volume-button
 {
   padding: 10px;
   border: 0;
@@ -55,21 +66,47 @@ body
   cursor: pointer;
 }
 
-#fullscreen-windowed-button
+#fullscreen-windowed-button, #settings-button
 {
-  position: absolute;
-  right: 0;
+  /* position: absolute; */
+  float: right;
 }
 
-#togglePlay-image, #togglePause-image
+#togglePlay-image, #togglePause-image, #settings-image, #volume-image
 {
   width: 20px;
   height: 20px;
 }
 
+#settings-button:hover
+{
+  transition: 2s;
+  transform: rotate(45%);
+}
+
 .button-content
 {
-  fill: #fff;
+  transition: fill .2s;
+  fill: rgba(255, 255, 255, 0.8);
+}
+
+.button-content-stroke
+{
+  transition: stroke .2s;
+  stroke: rgba(255, 255, 255, 0.8);
+  stroke-width: 3;
+  stroke-linecap: round;
+  fill: none;
+}
+
+button:hover .button-content
+{
+  fill: rgba(255, 255, 255, 1);
+}
+
+button:hover .button-content-stroke
+{
+  stroke: rgba(255, 255, 255, 1);
 }
 
 .video-progressbar
@@ -85,9 +122,28 @@ body
   height: 4px;
   background-color: orangered;
   transition: height .1s;
+  /* padding-top: 3px; */
 }
 
 .video-progressbar:hover .progressbar-filled
 {
   height: 6px;
+}
+
+video::-webkit-media-controls {
+  display:none !important;
+}
+
+video::-webkit-media-controls-enclosure {
+  display:none !important;
+}
+
+video::-webkit-full-screen {
+  background: white !important;
+  /* display:none !important; */
+}
+
+video::-webkit-full-screen::backdrop
+{
+  background: white !important;
 }
