@@ -1,5 +1,6 @@
 var player = document.querySelector('.player');
 var video = player.querySelector('.video');
+//var video_bg = document.querySelector('.video_bg'); //dell
 
 var play_pause_button = player.querySelector('#play-pause-button');
 var fullscreen_windowed_button = player.querySelector('#fullscreen-windowed-button');
@@ -16,6 +17,8 @@ var none_volume_image = volume_button.querySelector('#none-volume-image');
 
 var progressbar_filled = player.querySelector('.progressbar-filled');
 
+var fullScreenMode = document.fullScreen || document.mozFullScreen || document.webkitIsFullScreen; // This will return true or false depending on if it's full screen or not.
+
 // var volume_value = video.volume;
 
 var slider_volume = player.querySelector('.player-slider-volume');
@@ -25,11 +28,13 @@ function togglePlayPause() //function play/pause video
 {
     var togglePlayPause = video.paused ? 'play' : 'pause';
     video[togglePlayPause]();
+    //video_bg[togglePlayPause](); //dell
 }
 
 function toggleFullscreenWindowed() //function deployment/cancel fullscreen
 {
-  var toggleFullscreenWindowed = video.webkitDisplayingFullscreen ? (expand_button_image.style.display = 'block', minimize_button_image.style.display = 'none', video.webkitExitFullscreen()) : (expand_button_image.style.display = 'none', minimize_button_image.style.display = 'block', video.requestFullscreen());
+  fullScreenMode = document.fullScreen || document.mozFullScreen || document.webkitIsFullScreen;
+  var toggleFullscreenWindowed = (fullScreenMode) ? (expand_button_image.style.display = 'block', minimize_button_image.style.display = 'none', document.exitFullscreen()) : (expand_button_image.style.display = 'none', minimize_button_image.style.display = 'block', player.requestFullscreen());
 }
 
 function togglePlayPauseUpdate() //function button image change play/pause
@@ -110,8 +115,10 @@ function detectKeypress(e) {
 	  togglePlayPause();
 	}
   if (e.keyCode == 27) {
-    if (video.webkitDisplayingFullscreen == 'true') {
-      video.webkitExitFullscreen();
+    // fullScreenMode = document.fullScreen || document.mozFullScreen || document.webkitIsFullScreen;
+    console.log(fullScreenMode);
+    if (fullScreenMode) {
+      document.exitFullscreen();
       expand_button_image.style.display = 'block';
       minimize_button_image.style.display = 'none';
     }

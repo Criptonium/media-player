@@ -18,14 +18,28 @@ body
   max-width: 1000px;
   position: relative;
   overflow: hidden;
+  /* box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px; */ /*dell*/
 }
 
 .video
 {
   width: 100%;
+  /* transform:scale(1.398); */ /*dell*/
   z-index: 1 !important;
   /* display: contents; */
 }
+
+/* .video_bg */ /*dell*/ 
+/* { */
+  /* top: 0; */
+  /* margin: 0; */
+  /* padding: 0; */
+  /* height: 100vh; */
+  /* position: absolute; */
+  /* width: 100%; */
+  /* z-index: -1 !important; */
+  /* display: contents; */
+/* } */
 
 .player-controls
 {
